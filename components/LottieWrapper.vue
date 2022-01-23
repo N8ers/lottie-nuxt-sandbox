@@ -25,10 +25,6 @@ export default {
       required: false,
       default: '',
     },
-    // height: {
-    //   type: String,
-    //   default: 'auto',
-    // },
     width: {
       type: String,
       default: 'auto',
@@ -36,7 +32,8 @@ export default {
   },
   data() {
     return {
-      itemSelected: false,
+      itemSelected: true,
+      omitMouseLeaveAnimation: false,
       style: {
         overflow: 'hidden',
         margin: '0 auto',
@@ -53,26 +50,36 @@ export default {
       loop: this.options.loop || false,
       autoplay: this.options.autoplay || false,
       path: this.options.path,
-      //   animationData: this.options.animationData,
     })
+
+    if (this.itemSelected) {
+      this.anim.setSpeed(2)
+      this.anim.playSegments([50, 100], true)
+    }
   },
   methods: {
     handleMouseEnter() {
-      console.log('mouse enter')
-      this.anim.setSpeed(1)
-      this.anim.playSegments([1, 50], true)
+      if (!this.itemSelected) {
+        this.omitMouseLeaveAnimation = false
+        this.anim.setSpeed(1)
+        this.anim.playSegments([1, 50], true)
+      }
     },
     handleMouseLeave() {
-      this.anim.setSpeed(2)
-      this.anim.playSegments([48, 0], true)
+      if (!this.itemSelected && !this.omitMouseLeaveAnimation) {
+        this.anim.setSpeed(2)
+        this.anim.playSegments([48, 0], true)
+      }
     },
     handleClick() {
       if (!this.itemSelected) {
-        console.log('clicked ', this.anim.totalFrames)
+        // like
+        this.omitMouseLeaveAnimation = false
         this.anim.setSpeed(1)
         this.anim.playSegments([50, 100], true)
       } else {
-        console.log('clicked ', this.anim.totalFrames)
+        // unlike
+        this.omitMouseLeaveAnimation = true
         this.anim.setSpeed(2)
         this.anim.playSegments([48, 0], true)
       }

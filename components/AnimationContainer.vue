@@ -20,9 +20,14 @@ export default {
         autoplay: false,
         path: 'https://assets7.lottiefiles.com/private_files/lf30_ktaghzd4.json',
         subLabel: 'star',
-        // animationData: {},
       },
     }
   },
 }
 </script>
+
+<style>
+h1 {
+  text-align: center;
+}
+</style>
