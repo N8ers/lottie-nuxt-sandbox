@@ -6,7 +6,7 @@
     @mouseleave="handleMouseLeave"
   >
     <div ref="lottieContainer" />
-    <div v-if="subLabel" class="sub-label">{{ subLabel }}</div>
+    <div v-if="options.label" class="label">{{ subLabel }}</div>
   </div>
 </template>
 
@@ -19,11 +19,6 @@ export default {
     options: {
       type: Object,
       required: true,
-    },
-    subLabel: {
-      type: String,
-      required: false,
-      default: '',
     },
     width: {
       type: String,
@@ -103,7 +98,7 @@ export default {
   background: rgba(234, 235, 244, 0.642);
 }
 
-.sub-label {
+.label {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 }
